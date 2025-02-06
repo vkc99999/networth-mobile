@@ -23,7 +23,7 @@
             max-width: 400px;
             background: black; /* Black background for boxes */
             padding: 20px;
-            border-radius: 15px;
+            border-radius: 25px; /* Rounded Corners */
             box-shadow: 0 0 15px white; /* Glowing effect */
         }
         h1 { color: #ff00ff; font-size: 22px; font-weight: bold; } /* Bright Magenta */
@@ -31,8 +31,8 @@
         p { color: #ff6600; font-size: 18px; font-weight: bold; } /* Bright Orange */
         .net-worth { font-size: 20px; font-weight: bold; color: #ffd700; } /* Gold */
         .conversion-rate label { font-weight: bold; color: #00ffff; } /* Cyan */
-        
-        /* Dark Conversion Input Box */
+
+        /* Dark Conversion Input Box with Rounded Corners */
         input {
             width: 80px;
             padding: 8px;
@@ -42,6 +42,7 @@
             background: #222; /* Dark Background */
             border: 2px solid #ff00ff; /* Magenta Border */
             color: white; /* White Text */
+            border-radius: 15px; /* Rounded Corners */
         }
         
         .highlight-usd { color: #ff1493; text-shadow: 0px 0px 10px rgba(255, 20, 147, 1); font-weight: bold; } /* Deep Pink */
@@ -55,8 +56,8 @@
         <!-- Telugu Section on Top -->
         <div class="container">
             <h1>నికర సంపద గణన</h1>
-            <h2>2027 లక్ష్యం: <span id="target_usd_telugu">$2,085,056</span> (<span id="target_inr_telugu">₹180,774,376</span>)</h2>
-            <p>3 సంవత్సరాల భూదరాన్ని పరిగణనలోకి తీసుకుని, 5% ఆస్తి వృద్ధి రేటు, నెలకు $5000 పొదుపు.</p>
+            <h2>2027 లక్ష్యం: <span id="target_usd_telugu">$2,085,056</span> (<span id="target_inr_telugu">₹1,80,77,43,76</span>)</h2>
+            <p>3 సంవత్సరాల భూదరాన్ని పరిగణనలోకి తీసుకుని, 5% ఆస్తి వృద్ధి రేటు, నెలకు $5,000 పొదుపు.</p>
 
             <div class="conversion-rate">
                 <label>కన్వర్షన్ రేట్:</label>
@@ -71,8 +72,8 @@
         <!-- English Section Below -->
         <div class="container">
             <h1>Net Worth Calculator</h1>
-            <h2>2027 Target: <span id="target_usd">$2,085,056</span> (<span id="target_inr">₹180,774,376</span>)</h2>
-            <p>Considering 3-year land target price, plus 5% increase of assets, plus $5000/month savings.</p>
+            <h2>2027 Target: <span id="target_usd">$2,085,056</span> (<span id="target_inr">₹1,80,77,43,76</span>)</h2>
+            <p>Considering 3-year land target price, plus 5% increase of assets, plus $5,000/month savings.</p>
 
             <div class="conversion-rate">
                 <label>Conversion Rate:</label>
@@ -98,15 +99,23 @@
 
             let totalNetWorthUSD = (assetA_future / 3) + (assetB_current / Math.pow(1 + assetB_rate, 3));
 
+            function formatUSD(number) {
+                return number.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            function formatINR(number) {
+                return number.toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
             function updateNetWorth() {
                 let usdToInrRate = parseFloat(conversionRateInput.value) || 86.70;
                 totalNetWorthUSD += savingsPerMillisecond * 100;
                 const netWorthINR = totalNetWorthUSD * usdToInrRate;
 
-                document.getElementById("networth_usd").innerHTML = `<span class="highlight-usd">$${totalNetWorthUSD.toFixed(2)}</span>`;
-                document.getElementById("networth_inr").innerHTML = `<span class="highlight-inr">₹${netWorthINR.toFixed(2)}</span>`;
-                document.getElementById("networth_usd_telugu").innerHTML = `<span class="highlight-usd">$${totalNetWorthUSD.toFixed(2)}</span>`;
-                document.getElementById("networth_inr_telugu").innerHTML = `<span class="highlight-inr">₹${netWorthINR.toFixed(2)}</span>`;
+                document.getElementById("networth_usd").innerHTML = `<span class="highlight-usd">$${formatUSD(totalNetWorthUSD)}</span>`;
+                document.getElementById("networth_inr").innerHTML = `<span class="highlight-inr">₹${formatINR(netWorthINR)}</span>`;
+                document.getElementById("networth_usd_telugu").innerHTML = `<span class="highlight-usd">$${formatUSD(totalNetWorthUSD)}</span>`;
+                document.getElementById("networth_inr_telugu").innerHTML = `<span class="highlight-inr">₹${formatINR(netWorthINR)}</span>`;
             }
 
             setInterval(updateNetWorth, 100);
