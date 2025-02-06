@@ -8,42 +8,64 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background-color: yellow; /* Bright Yellow Background */
             margin: 0;
             padding: 20px;
         }
         .container-wrapper {
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Stack containers vertically */
+            align-items: center;
             gap: 20px;
-            flex-wrap: wrap;
         }
         .container {
-            width: 300px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            background: black; /* Black background for boxes */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px white; /* Glowing effect */
         }
-        h1 { color: #bf7cf2; font-size: 20px; }
-        h2 { color: #1cff8e; font-size: 18px; }
-        p { color: #333; font-size: 16px; }
-        .net-worth { font-size: 18px; font-weight: bold; color: #fca919; }
-        .conversion-rate label { font-weight: bold; color: #26a4ed; }
+        h1 { color: #ff00ff; font-size: 22px; font-weight: bold; } /* Bright Magenta */
+        h2 { color: #00ff00; font-size: 20px; font-weight: bold; } /* Neon Green */
+        p { color: #ff6600; font-size: 18px; font-weight: bold; } /* Bright Orange */
+        .net-worth { font-size: 20px; font-weight: bold; color: #ffd700; } /* Gold */
+        .conversion-rate label { font-weight: bold; color: #00ffff; } /* Cyan */
         input {
             width: 80px;
-            padding: 5px;
+            padding: 8px;
             margin-top: 10px;
             text-align: center;
             font-weight: bold;
+            background: white;
+            border: 2px solid #ff00ff;
+            color: black;
         }
-        .highlight-usd { color: #FF1493; text-shadow: 0px 0px 10px rgba(255, 20, 147, 1); }
-        .highlight-inr { color: #FF8C00; text-shadow: 0px 0px 10px rgba(255, 140, 0, 1); }
+        .highlight-usd { color: #ff1493; text-shadow: 0px 0px 10px rgba(255, 20, 147, 1); font-weight: bold; } /* Deep Pink */
+        .highlight-inr { color: #ff4500; text-shadow: 0px 0px 10px rgba(255, 69, 0, 1); font-weight: bold; } /* Bright Red-Orange */
     </style>
 </head>
 <body>
 
     <div class="container-wrapper">
+        
+        <!-- Telugu Section on Top -->
+        <div class="container">
+            <h1>నికర సంపద గణన</h1>
+            <h2>2027 లక్ష్యం: <span id="target_usd_telugu">$2,085,056</span> (<span id="target_inr_telugu">₹180,774,376</span>)</h2>
+            <p>3 సంవత్సరాల భూదరాన్ని పరిగణనలోకి తీసుకుని, 5% ఆస్తి వృద్ధి రేటు, నెలకు $5000 పొదుపు.</p>
+
+            <div class="conversion-rate">
+                <label>కన్వర్షన్ రేట్:</label>
+                <input type="number" id="conversion_rate_telugu" value="86.70" step="0.01" disabled>
+            </div>
+
+            <h2 class="net-worth">ప్రస్తుత నికర సంపద:</h2>
+            <p>USD: $<span id="networth_usd_telugu" class="highlight-usd">0</span></p>
+            <p>INR: ₹<span id="networth_inr_telugu" class="highlight-inr">0</span></p>
+        </div>
+
+        <!-- English Section Below -->
         <div class="container">
             <h1>Net Worth Calculator</h1>
             <h2>2027 Target: <span id="target_usd">$2,085,056</span> (<span id="target_inr">₹180,774,376</span>)</h2>
@@ -59,20 +81,6 @@
             <p>INR: ₹<span id="networth_inr" class="highlight-inr">0</span></p>
         </div>
 
-        <div class="container">
-            <h1>నికర సంపద గణన</h1>
-            <h2>2027 లక్ష్యం: <span id="target_usd_telugu">$2,085,056</span> (<span id="target_inr_telugu">₹180,774,376</span>)</h2>
-            <p>3 సంవత్సరాల భూదరాన్ని పరిగణనలోకి తీసుకుని, 5% ఆస్తి వృద్ధి రేటు, నెలకు $5000 పొదుపు.</p>
-
-            <div class="conversion-rate">
-                <label>కన్వర్షన్ రేట్:</label>
-                <input type="number" id="conversion_rate_telugu" value="86.70" step="0.01" disabled>
-            </div>
-
-            <h2 class="net-worth">ప్రస్తుత నికర సంపద:</h2>
-            <p>USD: $<span id="networth_usd_telugu" class="highlight-usd">0</span></p>
-            <p>INR: ₹<span id="networth_inr_telugu" class="highlight-inr">0</span></p>
-        </div>
     </div>
 
     <script>
