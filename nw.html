@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Worth Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .container {
+            width: 300px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 { color: #bf7cf2; font-size: 20px; }
+        h2 { color: #1cff8e; font-size: 18px; }
+        p { color: #333; font-size: 16px; }
+        .net-worth { font-size: 18px; font-weight: bold; color: #fca919; }
+        .conversion-rate label { font-weight: bold; color: #26a4ed; }
+        input {
+            width: 80px;
+            padding: 5px;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .highlight-usd { color: #FF1493; text-shadow: 0px 0px 10px rgba(255, 20, 147, 1); }
+        .highlight-inr { color: #FF8C00; text-shadow: 0px 0px 10px rgba(255, 140, 0, 1); }
+    </style>
+</head>
+<body>
+
+    <div class="container-wrapper">
+        <div class="container">
+            <h1>Net Worth Calculator</h1>
+            <h2>2027 Target: <span id="target_usd">$2,085,056</span> (<span id="target_inr">₹180,774,376</span>)</h2>
+            <p>Considering 3-year land target price, plus 5% increase of assets, plus $5000/month savings.</p>
+
+            <div class="conversion-rate">
+                <label>Conversion Rate:</label>
+                <input type="number" id="conversion_rate" value="86.70" step="0.01">
+            </div>
+
+            <h2 class="net-worth">Current Net Worth:</h2>
+            <p>USD: $<span id="networth_usd" class="highlight-usd">0</span></p>
+            <p>INR: ₹<span id="networth_inr" class="highlight-inr">0</span></p>
+        </div>
+
+        <div class="container">
+            <h1>నికర సంపద గణన</h1>
+            <h2>2027 లక్ష్యం: <span id="target_usd_telugu">$2,085,056</span> (<span id="target_inr_telugu">₹180,774,376</span>)</h2>
+            <p>3 సంవత్సరాల భూదరాన్ని పరిగణనలోకి తీసుకుని, 5% ఆస్తి వృద్ధి రేటు, నెలకు $5000 పొదుపు.</p>
+
+            <div class="conversion-rate">
+                <label>కన్వర్షన్ రేట్:</label>
+                <input type="number" id="conversion_rate_telugu" value="86.70" step="0.01" disabled>
+            </div>
+
+            <h2 class="net-worth">ప్రస్తుత నికర సంపద:</h2>
+            <p>USD: $<span id="networth_usd_telugu" class="highlight-usd">0</span></p>
+            <p>INR: ₹<span id="networth_inr_telugu" class="highlight-inr">0</span></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const conversionRateInput = document.getElementById("conversion_rate");
+
+            const assetA_future = 1384125;
+            const assetB_current = 450000;
+            const assetB_rate = 0.05;
+            const monthlySavings = 5000;
+            const savingsPerMillisecond = monthlySavings / (30 * 24 * 60 * 60 * 1000);
+
+            let totalNetWorthUSD = (assetA_future / 3) + (assetB_current / Math.pow(1 + assetB_rate, 3));
+
+            function updateNetWorth() {
+                let usdToInrRate = parseFloat(conversionRateInput.value) || 86.70;
+                totalNetWorthUSD += savingsPerMillisecond * 100;
+                const netWorthINR = totalNetWorthUSD * usdToInrRate;
+
+                document.getElementById("networth_usd").innerHTML = `<span class="highlight-usd">$${totalNetWorthUSD.toFixed(2)}</span>`;
+                document.getElementById("networth_inr").innerHTML = `<span class="highlight-inr">₹${netWorthINR.toFixed(2)}</span>`;
+                document.getElementById("networth_usd_telugu").innerHTML = `<span class="highlight-usd">$${totalNetWorthUSD.toFixed(2)}</span>`;
+                document.getElementById("networth_inr_telugu").innerHTML = `<span class="highlight-inr">₹${netWorthINR.toFixed(2)}</span>`;
+            }
+
+            setInterval(updateNetWorth, 100);
+        });
+    </script>
+
+</body>
+</html>
